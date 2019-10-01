@@ -92,7 +92,7 @@ namespace MateODragao {
                                     int poderAtaqueGuerreiro = guerreiro.Forca > guerreiro.Inteligencia ? guerreiro.Forca + guerreiro.Destreza : guerreiro.Inteligencia + guerreiro.Destreza;
 
                                     if (guerreiroDestrezaTotal > dragaoDestrezaTotal) {
-                                        System.Console.WriteLine ($"{guerreiro.Nome.ToUpper()}: Toma essa lagarto MALDJEETO!");
+                                        System.Console.WriteLine ($"{guerreiro.Nome.ToUpper()}: Toma essa lagarto MALDJEETO! BIRLLLL!");
                                         dragao.Vida -= poderAtaqueGuerreiro + 5;
                                         System.Console.WriteLine ($"HP Dragão: {dragao.Vida}");
                                         System.Console.WriteLine ($"HP Jogador: {guerreiro.Vida}");
