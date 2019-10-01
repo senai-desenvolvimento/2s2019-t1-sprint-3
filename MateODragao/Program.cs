@@ -16,18 +16,18 @@ namespace MateODragao {
 
                 System.Console.WriteLine (" 1 - Iniciar jogo");
                 System.Console.WriteLine (" 0 - Sair do jogo");
+                System.Console.Write (" Digite o código da opção:");
                 string opcaoJogador = Console.ReadLine ();
 
                 /* FIM - Menu Principal */
-                switch (opcaoJogador) 
-                {
+                switch (opcaoJogador) {
                     case "1":
                         Console.Clear ();
 
                         /* INICIO - Criando os personagens (objetos) */
                         Guerreiro guerreiro = new Guerreiro ();
                         guerreiro.Nome = "Asdrúbal";
-                        guerreiro.Sobrenome = "Calhorda";
+                        guerreiro.Sobrenome = "Mequetreff";
                         guerreiro.CidadeNatal = "Pentescopéia";
                         guerreiro.DataDeNascimento = DateTime.Parse ("01/01/1450");
                         guerreiro.FerramentaAtaque = "Espada";
@@ -68,7 +68,6 @@ namespace MateODragao {
 
                         bool jogadorAtacaPrimeiro = guerreiro.Destreza > dragao.Destreza ? true : false;
                         bool jogadorNaoCorreu = true;
-                        int poderAtaqueGuerreiro = guerreiro.Forca > guerreiro.Inteligencia ? guerreiro.Forca + guerreiro.Destreza : guerreiro.Inteligencia + guerreiro.Destreza;
 
                         /** INICIO - Quando o jogador ataca primeiro */
                         if (jogadorAtacaPrimeiro) {
@@ -80,7 +79,7 @@ namespace MateODragao {
                             System.Console.WriteLine ("Escolha sua ação");
                             System.Console.WriteLine (" 1 - Atacar");
                             System.Console.WriteLine (" 2 - Fugir");
-                            System.Console.Write("");
+                            System.Console.Write (" Digite o código da opção:");
                             string opcaoBatalhaJogador = Console.ReadLine ();
 
                             switch (opcaoBatalhaJogador) {
@@ -90,7 +89,7 @@ namespace MateODragao {
                                     int numeroAleatorioDragao = geradorNumeroAleatorio.Next (0, 5);
                                     int guerreiroDestrezaTotal = guerreiro.Destreza + numeroAleatorioJogador;
                                     int dragaoDestrezaTotal = guerreiro.Destreza + numeroAleatorioDragao;
-                                    poderAtaqueGuerreiro = guerreiro.Forca > guerreiro.Inteligencia ? guerreiro.Forca : guerreiro.Inteligencia;
+                                    int poderAtaqueGuerreiro = guerreiro.Forca > guerreiro.Inteligencia ? guerreiro.Forca + guerreiro.Destreza : guerreiro.Inteligencia + guerreiro.Destreza;
 
                                     if (guerreiroDestrezaTotal > dragaoDestrezaTotal) {
                                         System.Console.WriteLine ($"{guerreiro.Nome.ToUpper()}: Toma essa lagarto MALDJEETO!");
@@ -98,7 +97,9 @@ namespace MateODragao {
                                         System.Console.WriteLine ($"HP Dragão: {dragao.Vida}");
                                         System.Console.WriteLine ($"HP Jogador: {guerreiro.Vida}");
                                     } else {
-                                        System.Console.WriteLine ($"{dragao.Nome.ToUpper()}: Errrrrou, humanóide tosssssco!");
+                                        System.Console.WriteLine ($"{dragao.Nome.ToUpper()}: Errrrrou, humanóide tosco!");
+                                        System.Console.WriteLine ($"HP Dragão: {dragao.Vida}");
+                                        System.Console.WriteLine ($"HP Jogador: {guerreiro.Vida}");
                                     }
                                     break;
                                 case "2":
@@ -117,7 +118,9 @@ namespace MateODragao {
                         while (dragao.Vida > 0 && guerreiro.Vida > 0 && jogadorNaoCorreu) {
 
                             Console.Clear ();
-                            System.Console.WriteLine ("Turno do dragão:");
+                            System.Console.WriteLine ("------------------------------");
+                            System.Console.WriteLine ("       Turno do dragão:");
+                            System.Console.WriteLine ("------------------------------");
                             Random geradorNumeroAleatorio = new Random ();
                             int numeroAleatorioJogador = geradorNumeroAleatorio.Next (0, 5);
                             int numeroAleatorioDragao = geradorNumeroAleatorio.Next (0, 5);
@@ -131,19 +134,30 @@ namespace MateODragao {
                                 System.Console.WriteLine ($"HP Jogador: {guerreiro.Vida}");
                             } else {
                                 System.Console.WriteLine ($"{guerreiro.Nome.ToUpper()}: Eita lasquera que essa passou perto!");
+                                System.Console.WriteLine ($"HP Dragão: {dragao.Vida}");
+                                System.Console.WriteLine ($"HP Jogador: {guerreiro.Vida}");
                             }
 
-                            System.Console.WriteLine();
+                            System.Console.WriteLine ();
                             System.Console.WriteLine ("Aperte ENTER para prosseguir");
                             Console.ReadLine ();
 
                             Console.Clear ();
 
-                            System.Console.WriteLine ("Turno do jogador:");
+                            if (guerreiro.Vida <= 0) {
+                                System.Console.WriteLine ("JOGADOR Murreeeeeu!");
+                                System.Console.WriteLine ();
+                                System.Console.WriteLine ("Aperte ENTER para prosseguir");
+                                Console.ReadLine ();
+                                break;
+                            }
+                            System.Console.WriteLine ("------------------------------");
+                            System.Console.WriteLine ("       Turno do jogador:");
+                            System.Console.WriteLine ("------------------------------");
                             System.Console.WriteLine ("Escolha sua ação");
                             System.Console.WriteLine (" 1 - Atacar");
                             System.Console.WriteLine (" 2 - Fugir");
-
+                            System.Console.Write (" Digite o código da opção:");
                             string opcaoBatalhaJogador = Console.ReadLine ();
 
                             switch (opcaoBatalhaJogador) {
@@ -153,7 +167,7 @@ namespace MateODragao {
                                     numeroAleatorioDragao = geradorNumeroAleatorio.Next (0, 5);
                                     guerreiroDestrezaTotal = guerreiro.Destreza + numeroAleatorioJogador;
                                     dragaoDestrezaTotal = guerreiro.Destreza + numeroAleatorioDragao;
-                                    poderAtaqueGuerreiro = guerreiro.Forca > guerreiro.Inteligencia ? guerreiro.Forca : guerreiro.Inteligencia;
+                                    int poderAtaqueGuerreiro = guerreiro.Forca > guerreiro.Inteligencia ? guerreiro.Forca + guerreiro.Destreza : guerreiro.Inteligencia + guerreiro.Destreza;
 
                                     if (guerreiroDestrezaTotal > dragaoDestrezaTotal) {
                                         System.Console.WriteLine ($"{guerreiro.Nome.ToUpper()}: Toma essa lagarto MALDJEETO!");
@@ -170,13 +184,15 @@ namespace MateODragao {
                                     break;
                             }
 
-                            if (guerreiro.Vida <= 0) {
-                                System.Console.WriteLine ("JOGADOR Murreeeeeu!");
-                            } else if (dragao.Vida <= 0) {
-                                System.Console.WriteLine ("El dragón murió!");
+                            if (dragao.Vida <= 0) {
+                                System.Console.WriteLine ("DRAGÃO Murreeeeeu!");
+                                System.Console.WriteLine ();
+                                System.Console.WriteLine ("Aperte ENTER para prosseguir");
+                                Console.ReadLine ();
+                                break;
                             }
 
-                            System.Console.WriteLine();
+                            System.Console.WriteLine ();
                             System.Console.WriteLine ("Aperte ENTER para prosseguir");
                             Console.ReadLine ();
                         }
