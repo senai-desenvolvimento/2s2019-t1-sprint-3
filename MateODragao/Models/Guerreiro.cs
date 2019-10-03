@@ -18,19 +18,7 @@ namespace MateODragao.Models {
         public int Vigor { get; set; }
         public int Vida { get; set; }
 
-        /* Construtor mais simples */
-        public Guerreiro (string nome, string sobrenome, string cidadeNatal, DateTime dataNascimento,int forca, int destreza, int agilidade, int inteligencia, int vigor) {
-            this.Nome = nome;
-            this.Sobrenome = sobrenome;
-            this.CidadeNatal = cidadeNatal;
-            this.DataNascimento = dataNascimento;
-            this.Forca = forca;
-            this.Destreza = destreza;
-            this.Agilidade = agilidade;
-            this.Inteligencia = inteligencia;
-            this.Vigor = vigor;
-            this.Vida = this.Vigor * 10;
-        }
+        
         /* Construtor completo */
         public Guerreiro (string nome, string sobrenome, string cidadeNatal, DateTime dataNascimento, string ferramentaAtaque, string ferramentaProtecao, int forca, int destreza, int agilidade, int inteligencia, int vigor) {
             this.Nome = nome;
@@ -39,11 +27,27 @@ namespace MateODragao.Models {
             this.DataNascimento = dataNascimento;
             this.FerramentaAtaque = ferramentaAtaque;
             this.FerramentaProtecao = ferramentaProtecao;
-            this.Forca = forca;
-            this.Destreza = destreza;
-            this.Agilidade = agilidade;
-            this.Inteligencia = inteligencia;
-            this.Vigor = vigor;
+            this.Forca = 1 + forca;
+            this.Destreza = 1 + destreza;
+            this.Agilidade = 1 +  agilidade;
+            this.Inteligencia = 1 + inteligencia;
+            this.Vigor = 1 +  vigor;
+            this.Vida = this.Vigor * 10;
+        }
+
+        /* Construtor otimizado */
+        public Guerreiro (string nome, string sobrenome, string cidadeNatal, DateTime dataNascimento, string ferramentaAtaque, string ferramentaProtecao, int[] atributos) {
+            this.Nome = nome;
+            this.Sobrenome = sobrenome;
+            this.CidadeNatal = cidadeNatal;
+            this.DataNascimento = dataNascimento;
+            this.FerramentaAtaque = ferramentaAtaque;
+            this.FerramentaProtecao = ferramentaProtecao;
+            this.Forca = 1 + atributos[0];
+            this.Destreza = 1 + atributos[1];
+            this.Agilidade = 1 +  atributos[2];
+            this.Inteligencia = 1 + atributos[3];
+            this.Vigor = 1 +  atributos[4];
             this.Vida = this.Vigor * 10;
         }
 
