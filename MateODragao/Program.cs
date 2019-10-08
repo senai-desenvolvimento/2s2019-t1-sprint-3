@@ -12,6 +12,7 @@ using MateODragao.Models;
  * * Objetivo: Mostrar a utilidade do break e do continue.
  * * Objetivo: Mostrar as extensões: Better Comments, indent-rainbow, Bracket Pair Colorizer 2, GitLens.
  * * Objetivo: Mostrar como manipular as cores no Console.
+ * * Objetivo: Mostrar como usar um enum para melhorar nossas mensagens.
  * ! Objetivo: Explicações sobre modificadores de acesso e static devem ficar pra depois.
  */
 namespace MateODragao {
@@ -71,12 +72,26 @@ namespace MateODragao {
                         bool jogadorNaoCorreu = true;
 
                         #region Quando o jogador ataca primeiro
+                        Console.Clear();
                         if (jogadorAtacaPrimeiro) {
+                            
                             int dano = CriarAtaqueJogador(guerreiro, dragao);
                             if (dano != -1) {
                                 dragao.Vida -= dano;
                             } else {
                                 jogadorNaoCorreu = false;
+                            }
+                            MostrarHP(guerreiro.Vida, dragao.Vida);
+
+                            if (dragao.Vida <= 0) {
+                                System.Console.WriteLine ("DRAGÃO Murreeeeeu!");
+                                System.Console.WriteLine ();
+                                System.Console.WriteLine ("Aperte ENTER para prosseguir");
+                                Console.ReadLine ();
+                                /**
+                                * ! Este break tem efeito diferente quando está fora do switch!
+                                */
+                                break;
                             }
                         }
                         #endregion
@@ -85,13 +100,10 @@ namespace MateODragao {
                         while (dragao.Vida > 0 && guerreiro.Vida > 0 && jogadorNaoCorreu) {
 
                             int dano = CriarAtaqueDragao(guerreiro, dragao);
+                            
+                            guerreiro.Vida -= dano;
 
-                            if (dano != -1) {
-                                guerreiro.Vida -= dano;
-                                MostrarHP(guerreiro.Vida, dragao.Vida);
-                            } else {
-                                jogadorNaoCorreu = false;
-                            }
+                            MostrarHP(guerreiro.Vida, dragao.Vida);
 
                             if (guerreiro.Vida <= 0) {
                                 System.Console.WriteLine ("JOGADOR Murreeeeeu!");
@@ -106,19 +118,23 @@ namespace MateODragao {
 
                             dano = CriarAtaqueJogador(guerreiro, dragao);
 
+                            if (dano != -1) {
+                                dragao.Vida -= dano;
+                            } else {
+                                jogadorNaoCorreu = false;
+                            }
+
+                            MostrarHP(guerreiro.Vida, dragao.Vida);
+
                             if (dragao.Vida <= 0) {
                                 System.Console.WriteLine ("DRAGÃO Murreeeeeu!");
                                 System.Console.WriteLine ();
                                 System.Console.WriteLine ("Aperte ENTER para prosseguir");
                                 Console.ReadLine ();
+                                /**
+                                * ! Este break tem efeito diferente quando está fora do switch!
+                                */
                                 break;
-                            }
-
-                            if (dano != -1) {
-                                dragao.Vida -= dano;
-                                MostrarHP(guerreiro.Vida, dragao.Vida);
-                            } else {
-                                jogadorNaoCorreu = false;
                             }
                         }
                         #endregion
@@ -141,13 +157,13 @@ namespace MateODragao {
 
         private static Guerreiro CriarGuerreiro () {
 
-            System.Console.WriteLine ("Deseja começar com um personagem pronto? Responda com S ou N.");
-            string respostaUsuario = Console.ReadLine ();
-
+            bool terminouDeMontar = false;
             Guerreiro guerreiro = null;
 
-            bool terminouDeMontar = false;
             do {
+                System.Console.WriteLine ("Deseja começar com um personagem pronto? Responda com S ou N.");
+                string respostaUsuario = Console.ReadLine ();
+
                 switch (respostaUsuario.ToUpper ()) 
                 {
                     case "S":
@@ -177,61 +193,85 @@ namespace MateODragao {
                         System.Console.Write ("Digite a ferramenta de proteção do personagem: ");
                         string ferramentaProtecao = Console.ReadLine ();
 
-                        int pontosIniciais = 7;
+                        int pontosIniciais = 1500;
 
                         /**
                          * * Vetores para nos ajudar a registrar os atributos do personagem
                          */
                         string[] listaNomesAtributos = { "Força", "Destreza", "Agilidade", "Inteligência", "Vigor" };
                         int[] listaValoresAtributos = { 1, 1, 1, 1, 1 };
-
+                        int maxPontos = 500;
                         while (pontosIniciais != 0) {
-                            Console.Clear ();
-                            System.Console.WriteLine ($"Você possui {pontosIniciais} pontos a serem distribuídos");
-                            System.Console.WriteLine ("Seu status atual:");
+                            
+                            #region - Distribuição dos pontos
+                            int quantidadeNomesAtributos = listaNomesAtributos.Length;
 
-                            /**
-                             * * Sincronizando o vetor com valores baseando-se nos vetores com nomes
-                             */
-                            for (int i = 0; i < listaNomesAtributos.Length; i++) {
-                                System.Console.WriteLine ($"{listaNomesAtributos[i]}: {listaValoresAtributos[i]}");
-                            }
+                            for (int i = 0; i < quantidadeNomesAtributos; i++) {
+                                #region - Tela de status atual
+                                Console.Clear ();
+                                System.Console.Write ($"Você possui ");
+                                Console.BackgroundColor = ConsoleColor.DarkYellow;
+                                Console.ForegroundColor = ConsoleColor.Black;
 
-                            System.Console.WriteLine ();
+                                System.Console.Write ($" {pontosIniciais} pontos ");
+                                Console.ResetColor();
 
-                            for (int i = 0; i < listaNomesAtributos.Length; i++) {
-                                
-                                System.Console.WriteLine ($"Digite a {listaNomesAtributos[i]} do personagem: ");
-                                int valor = int.Parse (Console.ReadLine ());
+                                System.Console.WriteLine(" a serem distribuídos");
+                                System.Console.WriteLine ("Seu status atual:");
 
-                                /* Se o atributo da vez for maior ou igual a 5, não podemos mais aumentá-lo, então mandamos o loop prosseguir */
-                                if (listaValoresAtributos[i] >= 5) {
-                                    MostrarMensagem ("Atributo já possui pelo menos 5 pontos. Passando para o próximo...", TipoMensagemEnum.ALERTA);
+                                /**
+                                * * Sincronizando o vetor com valores baseando-se nos vetores com nomes
+                                */
+                                for (int j = 0; j < quantidadeNomesAtributos; j++) {
+                                    System.Console.WriteLine ($"{listaNomesAtributos[j], 15}: {listaValoresAtributos[j], -2}");
+                                }
+
+                                System.Console.WriteLine ();
+                                #endregion
+
+                                /*
+                                 * É importante verificar a questão dos pontos iniciais (se ainda existem) para que o processo continue normalmente
+                                 */
+                                if (pontosIniciais <= 0) {
+                                    //MostrarMensagem ("Pontos já distribuídos", TipoMensagemEnum.SUCESSO);
+                                    /**
+                                     * ! Mostrar a utilidade do break
+                                     */
+                                    break;
+                                }
+
+                                /**
+                                 * * Se o atributo da vez for maior ou igual a @maxPontos, não podemos mais aumentá-lo, então mandamos o loop prosseguir 
+                                 */
+                                if (listaValoresAtributos[i] >= maxPontos) {
+                                    MostrarMensagem ($"Atributo {listaNomesAtributos[i].ToUpper()} já possui pelo menos {maxPontos} pontos. Passando para o próximo...", TipoMensagemEnum.ALERTA);
                                     /**
                                      * ! Mostrar a utilidade do continue
                                      */
                                     continue;
                                 }
+
+                                System.Console.WriteLine ($"Digite  o valor a ser somado em {listaNomesAtributos[i].ToUpper()} do personagem: ");
+                                int valor = int.Parse (Console.ReadLine ());
                                 
-                                /* Se o atributo da vez for maior ou igual a 5, não podemos mais aumentá-lo, então mandamos o loop prosseguir */
-                                if (pontosIniciais >= valor && (valor + listaValoresAtributos[i]) <= 5) {
+                                if ((valor + listaValoresAtributos[i]) >= maxPontos) {
+                                    MostrarMensagem($"{valor} ultrapassa o máximo de {maxPontos} pontos por atributo", TipoMensagemEnum.ERRO);
+                                    continue;
+                                }
+
+                                /* Aqui ocorre a distribuição dos pontos */
+                                if (pontosIniciais >= valor) {
                                     listaValoresAtributos[i] += valor;
                                     pontosIniciais -= valor;
-                                    System.Console.WriteLine ($"Sobraram {pontosIniciais} pontos");
-                                }
 
-                                if (pontosIniciais < valor) {
-                                    MostrarMensagem ("Você não possui tantos pontos assim. Tente novamente.", TipoMensagemEnum.ALERTA);
+                                } else if (pontosIniciais < valor) {
+                                    MostrarMensagem ("Você não possui tantos pontos assim. Tente novamente.", TipoMensagemEnum.ERRO);
                                 }
                                 
-                                if (pontosIniciais <= 0) {
-                                    MostrarMensagem ("Pontos já distribuídos", TipoMensagemEnum.SUCESSO);
-                                    break;
-                                }
                             }
-
+                            #endregion
                         }
-
+                        MostrarMensagem ("Montagem finalizada!", TipoMensagemEnum.SUCESSO);
                         guerreiro = new Guerreiro (nome, sobrenome, cidadeNatal, dataNascimento, ferramentaAtaque, ferramentaProtecao, listaValoresAtributos);
                         terminouDeMontar = true;
                         break;
@@ -298,8 +338,9 @@ namespace MateODragao {
             System.Console.WriteLine (mensagem);
             Console.ResetColor ();
 
-            System.Console.WriteLine ("\nAperte ENTER para voltar ao menu principal");
+            System.Console.WriteLine ("\nAperte ENTER para prosseguir");
             Console.ReadLine ();
+            Console.Clear();
         }
 
         public static int CriarAtaqueJogador (Guerreiro guerreiro, Dragao dragao) {
@@ -307,7 +348,7 @@ namespace MateODragao {
             System.Console.WriteLine ("Escolha sua ação");
             System.Console.WriteLine (" 1 - Atacar");
             System.Console.WriteLine (" 2 - Fugir");
-            System.Console.Write (" Digite o código da opção:");
+            System.Console.Write (" Digite o código da opção: ");
             string opcaoBatalhaJogador = Console.ReadLine ();
 
             /**
@@ -373,7 +414,6 @@ namespace MateODragao {
 
             } else {
                 System.Console.WriteLine ($"{guerreiro.Nome.ToUpper()}: Eita lasquera que essa passou perto!");
-                dano = -1;
                 /*
                  * Foi preciso tirar o MostrarHP daqui, pois o dano ainda não foi calculado!
                  */
