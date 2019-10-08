@@ -51,5 +51,10 @@ namespace MateODragao.Models {
             this.Vida = this.Vigor * 10;
         }
 
+        public void Atacar()
+        {
+            
+        }
+
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using MateODragao.Enums;
 using MateODragao.Models;
-
+using MateODragao.Views;
 
 /**
  * * _Aplicação: Mate o Dragão
@@ -23,19 +23,12 @@ namespace MateODragao {
 
             do {
                 #region - Menu Principal
-                Console.Clear ();
-                System.Console.WriteLine ("===========================");
-                System.Console.WriteLine ("       Mate o Dragão!");
-                System.Console.WriteLine ("===========================");
 
-                System.Console.WriteLine (" 1 - Iniciar jogo");
-                System.Console.WriteLine (" 0 - Sair do jogo");
-                System.Console.Write (" Digite o código da opção: ");
-                string opcaoJogador = Console.ReadLine ();
+                int opcaoJogador = MenuPrincipal.ApresentarMenuPrincipal();
 
                 #endregion
                 switch (opcaoJogador) {
-                    case "1":
+                    case 1:
                         Console.Clear ();
 
                         #region - Criando os personagens (objetos)
@@ -74,7 +67,7 @@ namespace MateODragao {
                         #region Quando o jogador ataca primeiro
                         Console.Clear();
                         if (jogadorAtacaPrimeiro) {
-                            
+
                             int dano = CriarAtaqueJogador(guerreiro, dragao);
                             if (dano != -1) {
                                 dragao.Vida -= dano;
@@ -140,7 +133,7 @@ namespace MateODragao {
                         #endregion
 
                         break;
-                    case "0":
+                    case 0:
                         jogadorNaoDesistiu = false;
                         break;
                     default:
