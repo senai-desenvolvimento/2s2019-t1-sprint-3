@@ -24,7 +24,7 @@ namespace MateODragao {
             do {
                 #region - Menu Principal
 
-                int opcaoJogador = MenuPrincipal.ApresentarMenuPrincipal();
+                int opcaoJogador = Menus.ApresentarMenuPrincipal();
 
                 #endregion
                 switch (opcaoJogador) {
@@ -294,13 +294,6 @@ namespace MateODragao {
             System.Console.WriteLine ("Aperte ENTER para prosseguir");
             Console.ReadLine ();
             Console.Clear ();
-        }
-
-        public static void GerarMenuTurnos (string quemEstaAgindo) {
-            Console.Clear ();
-            System.Console.WriteLine ("------------------------------");
-            System.Console.WriteLine ($"       Turno de {quemEstaAgindo}:");
-            System.Console.WriteLine ("------------------------------");
         }
 
         public static void MostrarHP (int guerreiroHP, int dragaoHP) {
