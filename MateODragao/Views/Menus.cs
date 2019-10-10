@@ -3,11 +3,6 @@ using System;
 namespace MateODragao.Views {
     public class Menus {
 
-        enum OpcoesMenu {
-            INICIAR_JOGO,
-            SAIR_DO_JOGO
-        }
-
         /// <summary>
         ///     Método que cria o menu principal e devolve o código referente à escolha do usuário
         /// </summary>
@@ -16,7 +11,7 @@ namespace MateODragao.Views {
         public static int ApresentarMenuPrincipal () {
             bool escolheu = false;
             int codigo = 0;
-            // string[] opcoesMenu = Enum.GetNames(typeof (OpcoesMenu));
+            // TODO: Implementar via Enum
             string[] opcoesMenu = { "Iniciar Jogo", "Carregar Jogo", "Sair do Jogo", };
 
             int opcaoMenuSelecionada = 0;
@@ -64,9 +59,8 @@ namespace MateODragao.Views {
         public static void ApresentarMenuTurnos(string nome)
         {
             Console.Clear ();
-            /*
-            TODO: Tornar dinâmica esta barra de título
-            */
+
+            // TODO: Tornar dinâmica esta barra de título
             System.Console.WriteLine ("------------------------------");
             System.Console.WriteLine ($"      Turno de {nome}");
             System.Console.WriteLine ("------------------------------");
@@ -77,6 +71,8 @@ namespace MateODragao.Views {
         {
             System.Console.WriteLine ("Escolha sua ação");
             System.Console.WriteLine (" 1 - Atacar");
+            // TODO: Implementar no futuro
+            // System.Console.WriteLine (" 2 - Habilidades");
             System.Console.WriteLine (" 2 - Fugir");
             System.Console.Write (" Digite o código da opção: ");
             string opcaoBatalhaJogador = Console.ReadLine ();

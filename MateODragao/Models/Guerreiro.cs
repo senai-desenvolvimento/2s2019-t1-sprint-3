@@ -51,9 +51,10 @@ namespace MateODragao.Models {
             this.Vida = this.Vigor * 10;
         }
 
-        public void Atacar()
+        public int Atacar()
         {
-            
+            int dano = this.Forca > this.Inteligencia ? this.Forca + this.Destreza : this.Inteligencia + this.Destreza;
+            return dano;
         }
 
     }

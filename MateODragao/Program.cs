@@ -354,7 +354,7 @@ namespace MateODragao {
                     int poderAtaqueGuerreiro = guerreiro.Forca > guerreiro.Inteligencia ? guerreiro.Forca + guerreiro.Destreza : guerreiro.Inteligencia + guerreiro.Destreza;
 
                     if (guerreiroDestrezaTotal > dragaoDestrezaTotal) {
-                        System.Console.WriteLine ($"{guerreiro.Nome.ToUpper()}: Toma essa lagarto MALDJEETO! BIRLLLL!");
+                        System.Console.WriteLine ($"{guerreiro.Nome.ToUpper()}: Toma essa lagarto \"MALDJEETO\"! BIRLLLL!");
                         dano += poderAtaqueGuerreiro + 5;
                         /*
                         * Foi preciso tirar o MostrarHP daqui, pois o dano ainda não foi calculado!
