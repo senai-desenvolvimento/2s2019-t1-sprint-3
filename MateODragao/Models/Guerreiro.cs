@@ -57,5 +57,14 @@ namespace MateODragao.Models {
             return dano;
         }
 
+        public void LevarDano(int dano)
+        {
+            this.Vida -= dano - this.Vigor;
+        }
+
+
+
     }
+
+    
 }
