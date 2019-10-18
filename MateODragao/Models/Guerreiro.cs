@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
 
-namespace MateODragao.Models {
-    public class Guerreiro {
+namespace MateODragao.Models
+{
+    public class Guerreiro
+    {
         public string Nome { get; private set; }
         public string Sobrenome { get; private set; }
         public string CidadeNatal { get; private set; }
@@ -17,10 +20,15 @@ namespace MateODragao.Models {
         public int Inteligencia { get; set; }
         public int Vigor { get; set; }
         public int Vida { get; set; }
+        /*
+            TODO: Implementar no futuro
+         */
+        public Dictionary<int, string> Frases { get; private set; }
 
-        
+
         /* Construtor completo */
-        public Guerreiro (string nome, string sobrenome, string cidadeNatal, DateTime dataNascimento, string ferramentaAtaque, string ferramentaProtecao, int forca, int destreza, int agilidade, int inteligencia, int vigor) {
+        public Guerreiro(string nome, string sobrenome, string cidadeNatal, DateTime dataNascimento, string ferramentaAtaque, string ferramentaProtecao, int forca, int destreza, int agilidade, int inteligencia, int vigor)
+        {
             this.Nome = nome;
             this.Sobrenome = sobrenome;
             this.CidadeNatal = cidadeNatal;
@@ -29,14 +37,15 @@ namespace MateODragao.Models {
             this.FerramentaProtecao = ferramentaProtecao;
             this.Forca = 1 + forca;
             this.Destreza = 1 + destreza;
-            this.Agilidade = 1 +  agilidade;
+            this.Agilidade = 1 + agilidade;
             this.Inteligencia = 1 + inteligencia;
-            this.Vigor = 1 +  vigor;
+            this.Vigor = 1 + vigor;
             this.Vida = this.Vigor * 10;
         }
 
         /* Construtor otimizado */
-        public Guerreiro (string nome, string sobrenome, string cidadeNatal, DateTime dataNascimento, string ferramentaAtaque, string ferramentaProtecao, int[] atributos) {
+        public Guerreiro(string nome, string sobrenome, string cidadeNatal, DateTime dataNascimento, string ferramentaAtaque, string ferramentaProtecao, int[] atributos)
+        {
             this.Nome = nome;
             this.Sobrenome = sobrenome;
             this.CidadeNatal = cidadeNatal;
@@ -45,9 +54,9 @@ namespace MateODragao.Models {
             this.FerramentaProtecao = ferramentaProtecao;
             this.Forca = 1 + atributos[0];
             this.Destreza = 1 + atributos[1];
-            this.Agilidade = 1 +  atributos[2];
+            this.Agilidade = 1 + atributos[2];
             this.Inteligencia = 1 + atributos[3];
-            this.Vigor = 1 +  atributos[4];
+            this.Vigor = 1 + atributos[4];
             this.Vida = this.Vigor * 10;
         }
 
@@ -57,14 +66,25 @@ namespace MateODragao.Models {
             return dano;
         }
 
-        public void LevarDano(int dano)
+        public bool LevarDano(int dano)
         {
-            this.Vida -= dano - this.Vigor;
+            if (this.Vigor > dano)
+            {
+                this.Vida -= dano;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-
+        public bool Fugir(int destrezaInimigo)
+        {
+            return destrezaInimigo < this.Destreza;
+        }
 
     }
 
-    
+
 }

@@ -49,18 +49,18 @@ namespace MateODragao
                          * ! Mostrar aos alunos como uma alteração no jeito de imprimir os diálogos seria muito penosa do jeito anterior pois teria que ser repetida 
                          * ! manualmente, já com o método, basta fazer a alteração nele.
                          */
-                        CriarDialogo(guerreiro.Nome, $"{dragao.Nome}, seu louco! Vim-lhe derrotar-lhe!");
-                        CriarDialogo(dragao.Nome, "Humano tolinho. Quem pensas que és?");
+                        Dialogos.CriarDialogo(guerreiro.Nome, $"{dragao.Nome}, seu louco! Vim-lhe derrotar-lhe!");
+                        Dialogos.CriarDialogo(dragao.Nome, "Humano tolinho. Quem pensas que és?");
 
-                        FinalizarDialogo();
+                        Dialogos.FinalizarDialogo();
                         #endregion
 
                         #region - Segundo Diálogo 
-                        CriarDialogo(guerreiro.Nome, $"Eu sou {guerreiro.Nome}! Da casa {guerreiro.Sobrenome}, ó criatura morfética!");
-                        CriarDialogo(guerreiro.Nome, $"Vim de {guerreiro.CidadeNatal} para derrotar-te e mostrar meu valor!");
-                        CriarDialogo(dragao.Nome, $"QUEM? DE ONDE? Bom, que seja...fritar-te-ei e devorar-te-ei, primata insolente!");
+                        Dialogos.CriarDialogo(guerreiro.Nome, $"Eu sou {guerreiro.Nome}! Da casa {guerreiro.Sobrenome}, ó criatura morfética!");
+                        Dialogos.CriarDialogo(guerreiro.Nome, $"Vim de {guerreiro.CidadeNatal} para derrotar-te e mostrar meu valor!");
+                        Dialogos.CriarDialogo(dragao.Nome, $"QUEM? DE ONDE? Bom, que seja...fritar-te-ei e devorar-te-ei, primata insolente!");
 
-                        FinalizarDialogo();
+                        Dialogos.FinalizarDialogo();
                         #endregion
 
                         /**
@@ -73,16 +73,8 @@ namespace MateODragao
                         Console.Clear();
                         if (jogadorAtacaPrimeiro)
                         {
-
-                            int dano = CriarAtaqueJogador(guerreiro, dragao);
-                            if (dano != -1)
-                            {
-                                dragao.Vida -= dano;
-                            }
-                            else
-                            {
-                                jogadorNaoCorreu = false;
-                            }
+                            int dano = guerreiro.Atacar();
+                            
                             MostrarHP(guerreiro.Vida, dragao.Vida);
 
                             if (dragao.Vida <= 0)
@@ -185,8 +177,7 @@ namespace MateODragao
                      * ! A implementação dessa opção abaixo é facultativa. Somente a opção acima já é o suficiente para que o jogo aconteça. 
                      */
                     case "N":
-
-                        
+                        guerreiro = Menus.ApresentarMenuCriacaoDePersonagem();
                         terminouDeMontar = true;
                         break;
                     default:
@@ -211,12 +202,12 @@ namespace MateODragao
         {
             System.Console.WriteLine($"HP Dragão: {dragaoHP}");
             System.Console.WriteLine($"HP Jogador: {guerreiroHP}");
-            FinalizarDialogo();
+            Dialogos.FinalizarDialogo();
         }
 
         public static int CriarAtaqueJogador(Guerreiro guerreiro, Dragao dragao)
         {
-            GerarMenuTurnos(guerreiro.Nome);
+            Menus.ApresentarMenuTurnos(guerreiro.Nome);
             System.Console.WriteLine("Escolha sua ação");
             System.Console.WriteLine(" 1 - Atacar");
             System.Console.WriteLine(" 2 - Fugir");
@@ -273,7 +264,7 @@ namespace MateODragao
              */
             int dano = 0;
 
-            GerarMenuTurnos(dragao.Nome);
+            Menus.ApresentarMenuTurnos(dragao.Nome);
             Random geradorNumeroAleatorio = new Random();
             int numeroAleatorioJogador = geradorNumeroAleatorio.Next(0, 5);
             int numeroAleatorioDragao = geradorNumeroAleatorio.Next(0, 5);

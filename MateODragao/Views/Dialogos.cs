@@ -4,10 +4,10 @@ namespace MateODragao.Views
 {
     public class Dialogos
     {
+
         public static void FinalizarDialogo()
         {
-            System.Console.WriteLine();
-            System.Console.WriteLine("Aperte ENTER para prosseguir");
+            System.Console.WriteLine("\nAperte ENTER para prosseguir");
             Console.ReadLine();
             Console.Clear();
         }
@@ -16,5 +16,6 @@ namespace MateODragao.Views
         {
             System.Console.WriteLine($"{emissor.ToUpper()}: {frase}");
         }
+        
     }
 }

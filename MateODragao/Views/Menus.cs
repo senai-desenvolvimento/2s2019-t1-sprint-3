@@ -199,12 +199,12 @@ namespace MateODragao.Views
         
             return new Guerreiro(nome, sobrenome, cidadeNatal, dataNascimento, ferramentaAtaque, ferramentaProtecao, listaValoresAtributos);
         }
-        public static string TratarTituloMenu(string titulo)
+        private static string TratarTituloMenu(string titulo)
         {
             return System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(titulo.Replace("_", " ").ToLower());
         }
 
-        public static void DestacarOpcao(string opcao)
+        private static void DestacarOpcao(string opcao)
         {
             Console.BackgroundColor = ConsoleColor.DarkRed;
             System.Console.WriteLine($"{opcao}");
