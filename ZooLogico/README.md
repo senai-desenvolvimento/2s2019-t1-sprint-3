@@ -6,12 +6,12 @@ O conceito desse lugar é deixar os animais o mais próximos possível de seu ha
 Para o primeiro momento, eles precisam que o sistema seja capaz de:
 * Registrar animais novos;
 * Alocá-los nos seguintes habitats:
- * Floresta
- * Estepes
- * Montanha
- * Deserto (de areia)
- * Pântano
- * Mar
- * Lago
- * Geleira
+    * Floresta;
+    * Estepes;
+    * Montanha;
+    * Deserto (de areia);
+    * Pântano;
+    * Mar;
+    * Lago;
+    * Geleira.
  
