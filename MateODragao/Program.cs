@@ -6,7 +6,7 @@ using MateODragao.Views;
 
 /**
  * * _Aplicação: Mate o Dragão
- * * _Branch: metodos
+ * * _Branch: abstracao
  * * Objetivo: Transferir a lógica do método Main para métodos públicos a fim de otimizar o nosso código e ensinar a importância de usarmos métodos.
  * * Objetivo: Mostrar a utilidade do #region.
  * * Objetivo: Mostrar a utilidade do break e do continue.
@@ -74,7 +74,7 @@ namespace MateODragao
                         if (jogadorAtacaPrimeiro)
                         {
                             int dano = guerreiro.Atacar();
-                            
+
                             MostrarHP(guerreiro.Vida, dragao.Vida);
 
                             if (dragao.Vida <= 0)
