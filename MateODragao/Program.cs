@@ -1,6 +1,11 @@
 ﻿using System;
 using MateODragao.Models;
 
+/**
+ * * _Aplicação: Mate o Dragão
+ * * _Branch: master
+ * * Objetivo: Mostrar a instanciação de objetos e montagem de classes.
+ */
 namespace MateODragao {
     class Program {
         static void Main (string[] args) {
