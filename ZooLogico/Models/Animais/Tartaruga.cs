@@ -2,7 +2,7 @@ using ZooLogico.Interfaces;
 
 namespace ZooLogico.Models.Animais
 {
-    public class Tartaruga : IAquatico
+    public class Tartaruga : Animal, IAquatico
     {
         public string Nadar()
         {

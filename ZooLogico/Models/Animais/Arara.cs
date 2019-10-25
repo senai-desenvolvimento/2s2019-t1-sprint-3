@@ -2,7 +2,7 @@ using ZooLogico.Interfaces;
 
 namespace ZooLogico.Models.Animais
 {
-    public class Arara : IVoador
+    public class Arara : Animal, IVoador
     {
         public string Voar()
         {

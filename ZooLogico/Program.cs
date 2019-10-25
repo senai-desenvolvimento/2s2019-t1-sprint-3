@@ -1,4 +1,5 @@
 ﻿using System;
+using ZooLogico.Models.Animais;
 
 namespace ZooLogico
 {
@@ -21,6 +22,13 @@ namespace ZooLogico
                 System.Console.WriteLine("|  Bem- vindo ao Zoo Lógico! |");
                 System.Console.WriteLine("==============================");
                 //TODO: Fazer um for para exibir o nome das classes e criar o dicionário para os animais
+                foreach (var item in Arca.animais.Values)
+                {
+                    System.Console.WriteLine(item.GetType().Name);
+                }
+
+                Console.ReadLine();
+                
                 
             } while(!encerrouPrograma);
         }
