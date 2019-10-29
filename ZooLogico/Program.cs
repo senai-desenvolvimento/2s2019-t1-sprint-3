@@ -62,28 +62,23 @@ namespace ZooLogico
             {
                 System.Console.WriteLine($":::{classe.Name} pode ir para a Piscina:::");
             }
-
-            if ((typeof(IArboricula)).Equals(@interface))
+            else if ((typeof(IArboricula)).Equals(@interface))
             {
                 System.Console.WriteLine($":::{classe.Name} pode ir para a Casa na Árvore:::");
             }
-
-            if ((typeof(IBranquiado)).Equals(@interface))
+            else if ((typeof(IBranquiado)).Equals(@interface))
             {
                 System.Console.WriteLine($":::{classe.Name} pode ir para o Aquário:::");
             }
-
-            if ((typeof(IQuionofilo)).Equals(@interface))
+            else if ((typeof(IQuionofilo)).Equals(@interface))
             {
                 System.Console.WriteLine($":::{classe.Name} pode ir para a Piscina Gelada:::");
             }
-
-            if ((typeof(ITerrestre)).Equals(@interface))
+            else if ((typeof(ITerrestre)).Equals(@interface))
             {
                 System.Console.WriteLine($":::{classe.Name} pode ir para os Pastos ou Caverna de Pedra:::");
             }
-
-            if ((typeof(IVoador)).Equals(@interface))
+            else if ((typeof(IVoador)).Equals(@interface))
             {
                 System.Console.WriteLine($":::{classe.Name} pode ir para a Gaiola:::");
             }
