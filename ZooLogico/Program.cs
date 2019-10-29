@@ -8,7 +8,7 @@ namespace ZooLogico
     /**
      * ----------------------------------------------------------------------------------------------------
      * * _Aplicação: Zoo Lógico
-     * * _Branch: master
+     * * _Branch: zoo-distribuicao
      * * TEMA: INTERFACE E POLIMORFISMO
      * ----------------------------------------------------------------------------------------------------
      *   Objetivo: Exercitar o polimorfismo usando interfaces.
@@ -23,34 +23,53 @@ namespace ZooLogico
             do
             {
                 #region Menu Principal
+
                 var codigo = 0;
+                
                 Console.Clear();
                 System.Console.WriteLine("===============================");
                 System.Console.WriteLine("|  Bem- vindo ao Zoo Lógico!  |");
                 System.Console.WriteLine("===============================");
-                // Gerar os itens do menu de forma automática
-                foreach (var item in Arca.Animais.Values)
-                {
-                    System.Console.WriteLine($"{"",5}{++codigo}. {item.GetType().Name}");
-                }
+                System.Console.WriteLine("     1. ALOCAR                 ");
+                System.Console.WriteLine("     2. SAIR                   ");
+                System.Console.WriteLine("===============================");
+
                 #endregion
-                System.Console.Write($"\n{"",2}Digite o código do animal: ");
+                System.Console.Write($"\n{"",2}Digite o código da ação: ");
                 
                 // Testando se o usuário digitou um código correto ou não
                 try
                 {
                     var opcaoUsuario = int.Parse(Console.ReadLine());
-                    var animal = Arca.Animais[opcaoUsuario];
-                    ClassificarAnimal(animal);
+                    switch (opcaoUsuario)
+                    {
+                        case 1:
+
+                        break;
+                        case 2:
+                        break;
+                    }
                 }
                 catch (Exception e)
                 {
                     System.Console.WriteLine("Por favor, digite um código válido");
                     Console.ReadLine();
-                    
                 }
             } while (!encerrouPrograma);
             #endregion
+        }
+
+        public static void AlocarAnimal()
+        {
+            Console.Clear();
+                System.Console.WriteLine("===============================");
+                System.Console.WriteLine("|       LISTA DE ANIMAIS      |");
+                System.Console.WriteLine("===============================");
+                for () 
+                {
+
+                }
+                System.Console.WriteLine("===============================");
         }
         public static void ClassificarAnimal(Animal animal)
         {
