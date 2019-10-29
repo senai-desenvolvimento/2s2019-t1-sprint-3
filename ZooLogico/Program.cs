@@ -25,7 +25,7 @@ namespace ZooLogico
                 #region Menu Principal
 
                 var codigo = 0;
-                
+
                 Console.Clear();
                 System.Console.WriteLine("===============================");
                 System.Console.WriteLine("|  Bem- vindo ao Zoo Lógico!  |");
@@ -36,7 +36,7 @@ namespace ZooLogico
 
                 #endregion
                 System.Console.Write($"\n{"",2}Digite o código da ação: ");
-                
+
                 // Testando se o usuário digitou um código correto ou não
                 try
                 {
@@ -45,9 +45,9 @@ namespace ZooLogico
                     {
                         case 1:
 
-                        break;
+                            break;
                         case 2:
-                        break;
+                            break;
                     }
                 }
                 catch (Exception e)
@@ -61,15 +61,31 @@ namespace ZooLogico
 
         public static void AlocarAnimal()
         {
+            var codigo = 0;
             Console.Clear();
-                System.Console.WriteLine("===============================");
-                System.Console.WriteLine("|       LISTA DE ANIMAIS      |");
-                System.Console.WriteLine("===============================");
-                for () 
-                {
+            System.Console.WriteLine("===============================");
+            System.Console.WriteLine("|       LISTA DE ANIMAIS      |");
+            System.Console.WriteLine("===============================");
+            foreach (var item in Arca.Animais.Values)
+            {
+                System.Console.WriteLine($"{"",5}{++codigo}. {item.GetType().Name}");
+            }
+            System.Console.Write($"\n{"",2}Digite o código do animal: ");
 
-                }
-                System.Console.WriteLine("===============================");
+            // Testando se o usuário digitou um código correto ou não
+            try
+            {
+                var opcaoUsuario = int.Parse(Console.ReadLine());
+                var animal = Arca.Animais[opcaoUsuario];
+                ClassificarAnimal(animal);
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine("Por favor, digite um código válido");
+                Console.ReadLine();
+
+            }
+            System.Console.WriteLine("===============================");
         }
         public static void ClassificarAnimal(Animal animal)
         {
