@@ -2,6 +2,7 @@
 using System.Linq;
 using ZooLogico.Interfaces;
 using ZooLogico.Models.Animais;
+using ZooLogico.Views;
 
 namespace ZooLogico
 {
@@ -17,41 +18,12 @@ namespace ZooLogico
     {
         static void Main(string[] args)
         {
-            // Variável de controle do Loop Principal
-            var encerrouPrograma = false;
-            #region Loop Principal
-            do
-            {
-                #region Menu Principal
-                var codigo = 0;
-                Console.Clear();
-                System.Console.WriteLine("===============================");
-                System.Console.WriteLine("|  Bem- vindo ao Zoo Lógico!  |");
-                System.Console.WriteLine("===============================");
-                // Gerar os itens do menu de forma automática
-                foreach (var item in Arca.Animais.Values)
-                {
-                    System.Console.WriteLine($"{"",5}{++codigo}. {item.GetType().Name}");
-                }
-                #endregion
-                System.Console.Write($"\n{"",2}Digite o código do animal: ");
-                
-                // Testando se o usuário digitou um código correto ou não
-                try
-                {
-                    var opcaoUsuario = int.Parse(Console.ReadLine());
-                    var animal = Arca.Animais[opcaoUsuario];
-                    ClassificarAnimal(animal);
-                }
-                catch (Exception e)
-                {
-                    System.Console.WriteLine("Por favor, digite um código válido");
-                    Console.ReadLine();
-                    
-                }
-            } while (!encerrouPrograma);
-            #endregion
+            MenuPrincipal.Exibir();
+            Console.ReadLine();
+            
         }
+
+        // ! Mudamos esse método
         public static void ClassificarAnimal(Animal animal)
         {
             // Esse @ é para que possamos usar o nome interface para a variável, que é uma palavra reservada do C#!
