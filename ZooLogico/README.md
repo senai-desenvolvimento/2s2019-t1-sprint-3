@@ -7,7 +7,7 @@ Você foi indicado por uma amiga de um sobrinho de um chegado seu para desenvolv
 ### Desafio 1.1
 Nesta fase você deve dizer para o usuário para qual das jaulas abaixo os animais devem ir. Para isso o sistema deve mostrar todos os animais disponíveis, em seguida pedir para que o usuário digite o código ou nome correspondente ao animal e depois mostrar uma mensagem com o nome da jaula destinada ao bicho.
 
-A princípio, os gerentes do lugar estão com poucas jaulas:
+A princípio, os gerentes do lugar estão com poucas jaulas **(não precisam ser classes ou interfaces nesse momento!)**:
 * Pasto (gramíneas e terreno vasto, ligeiramente regular com algumas árvores);
 * Gaiola (muitas árvores altas);
 * Casa em árvore (florestas...);

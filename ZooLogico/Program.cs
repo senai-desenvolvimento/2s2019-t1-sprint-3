@@ -1,39 +1,97 @@
 ﻿using System;
+using System.Linq;
+using ZooLogico.Interfaces;
 using ZooLogico.Models.Animais;
 
 namespace ZooLogico
 {
-/**
- * ----------------------------------------------------------------------------------------------------
- * * _Aplicação: Zoo Lógico
- * * _Branch: master
- * * TEMA: INTERFACE E POLIMORFISMO
- * ----------------------------------------------------------------------------------------------------
- *   Objetivo: Exercitar o polimorfismo usando interfaces.
- */
+    /**
+     * ----------------------------------------------------------------------------------------------------
+     * * _Aplicação: Zoo Lógico
+     * * _Branch: master
+     * * TEMA: INTERFACE E POLIMORFISMO
+     * ----------------------------------------------------------------------------------------------------
+     *   Objetivo: Exercitar o polimorfismo usando interfaces.
+     */
     class Program
     {
         static void Main(string[] args)
         {
+            // Variável de controle do Loop Principal
             var encerrouPrograma = false;
-            var codigo = 0;
+            #region Loop Principal
             do
             {
+                #region Menu Principal
+                var codigo = 0;
                 Console.Clear();
                 System.Console.WriteLine("===============================");
                 System.Console.WriteLine("|  Bem- vindo ao Zoo Lógico!  |");
                 System.Console.WriteLine("===============================");
-                //TODO: Fazer um for para exibir o nome das classes e criar o dicionário para os animais
-                foreach (var item in Arca.animais.Values)
+                // Gerar os itens do menu de forma automática
+                foreach (var item in Arca.Animais.Values)
                 {
                     System.Console.WriteLine($"{"",5}{++codigo}. {item.GetType().Name}");
                 }
-                System.Console.Write($"\n{"",-1}Digite o código do animal:");
-                var opcaoUsuario = Console.ReadLine();
-
+                #endregion
+                System.Console.Write($"\n{"",2}Digite o código do animal: ");
                 
-                
-            } while(!encerrouPrograma);
+                // Testando se o usuário digitou um código correto ou não
+                try
+                {
+                    var opcaoUsuario = int.Parse(Console.ReadLine());
+                    var animal = Arca.Animais[opcaoUsuario];
+                    ClassificarAnimal(animal);
+                }
+                catch (Exception e)
+                {
+                    System.Console.WriteLine("Por favor, digite um código válido");
+                    Console.ReadLine();
+                    
+                }
+            } while (!encerrouPrograma);
+            #endregion
         }
+        public static void ClassificarAnimal(Animal animal)
+        {
+            // Esse @ é para que possamos usar o nome interface para a variável, que é uma palavra reservada do C#!
+            var classe = animal.GetType();
+            var @interface = classe.GetInterfaces().FirstOrDefault();
+
+            if ((typeof(IAquatico)).Equals(@interface))
+            {
+                System.Console.WriteLine($":::{classe.Name} pode ir para a Piscina:::");
+            }
+
+            if ((typeof(IArboricula)).Equals(@interface))
+            {
+                System.Console.WriteLine($":::{classe.Name} pode ir para a Casa na Árvore:::");
+            }
+
+            if ((typeof(IBranquiado)).Equals(@interface))
+            {
+                System.Console.WriteLine($":::{classe.Name} pode ir para o Aquário:::");
+            }
+
+            if ((typeof(IQuionofilo)).Equals(@interface))
+            {
+                System.Console.WriteLine($":::{classe.Name} pode ir para a Piscina Gelada:::");
+            }
+
+            if ((typeof(ITerrestre)).Equals(@interface))
+            {
+                System.Console.WriteLine($":::{classe.Name} pode ir para os Pastos ou Caverna de Pedra:::");
+            }
+
+            if ((typeof(IVoador)).Equals(@interface))
+            {
+                System.Console.WriteLine($":::{classe.Name} pode ir para a Gaiola:::");
+            }
+
+            Console.ReadLine();
+
+        }
+
+
     }
 }

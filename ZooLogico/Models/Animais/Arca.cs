@@ -4,7 +4,7 @@ namespace ZooLogico.Models.Animais
 {
     public class Arca
     {
-        public static Dictionary<int, Animal> animais = new Dictionary<int, Animal>(){
+        public static Dictionary<int, Animal> Animais = new Dictionary<int, Animal>(){
             {1, new Arara()},
             {2, new Chimpanze()},
             {3, new Golfinho()},
