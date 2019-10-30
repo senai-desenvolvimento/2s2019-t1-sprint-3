@@ -2,6 +2,7 @@
 using System.Linq;
 using ZooLogico.Interfaces;
 using ZooLogico.Models.Animais;
+using ZooLogico.Models.Jaulas;
 
 namespace ZooLogico
 {
@@ -30,7 +31,7 @@ namespace ZooLogico
                 System.Console.WriteLine("===============================");
                 System.Console.WriteLine("|  Bem- vindo ao Zoo Lógico!  |");
                 System.Console.WriteLine("===============================");
-                System.Console.WriteLine("     1. ALOCAR                 ");
+                System.Console.WriteLine("     1. ALOCAR ANIMAL          ");
                 System.Console.WriteLine("     2. SAIR                   ");
                 System.Console.WriteLine("===============================");
 
@@ -44,9 +45,11 @@ namespace ZooLogico
                     switch (opcaoUsuario)
                     {
                         case 1:
-
+                            Animal animal = SelecionarAnimal();
+                            SelecionarJaula(animal);
                             break;
                         case 2:
+                            encerrouPrograma = true;
                             break;
                     }
                 }
@@ -59,33 +62,106 @@ namespace ZooLogico
             #endregion
         }
 
-        public static void AlocarAnimal()
+        public static Animal SelecionarAnimal()
         {
-            var codigo = 0;
-            Console.Clear();
-            System.Console.WriteLine("===============================");
-            System.Console.WriteLine("|       LISTA DE ANIMAIS      |");
-            System.Console.WriteLine("===============================");
-            foreach (var item in Arca.Animais.Values)
+            bool escolheuAnimal = false;
+            Animal animal = null;
+            do
             {
-                System.Console.WriteLine($"{"",5}{++codigo}. {item.GetType().Name}");
-            }
-            System.Console.Write($"\n{"",2}Digite o código do animal: ");
+                var codigo = 0;
+                Console.Clear();
+                System.Console.WriteLine("===============================");
+                System.Console.WriteLine("|       LISTA DE ANIMAIS      |");
+                System.Console.WriteLine("===============================");
+                foreach (var item in Arca.Animais.Values)
+                {
+                    System.Console.WriteLine($"{"",5}{++codigo}. {item.GetType().Name}");
+                }
+                System.Console.Write($"\n{"",2}Digite o código do animal: ");
 
-            // Testando se o usuário digitou um código correto ou não
-            try
+                // Testando se o usuário digitou um código correto ou não
+                try
+                {
+                    var opcaoUsuario = int.Parse(Console.ReadLine());
+                    animal = Arca.Animais[opcaoUsuario];
+
+                    escolheuAnimal = true;
+                }
+                catch (Exception e)
+                {
+                    System.Console.WriteLine("Por favor, digite um código válido");
+                    Console.ReadLine();
+                }
+                System.Console.WriteLine("===============================");
+            } while (!escolheuAnimal);
+            return animal;
+        }
+
+        public static void SelecionarJaula(Animal animal)
+        {
+            bool alocou = false;
+            do
             {
-                var opcaoUsuario = int.Parse(Console.ReadLine());
-                var animal = Arca.Animais[opcaoUsuario];
-                ClassificarAnimal(animal);
-            }
-            catch (Exception e)
-            {
-                System.Console.WriteLine("Por favor, digite um código válido");
+
+                var codigo = 0;
+                Console.Clear();
+                System.Console.WriteLine("===============================");
+                System.Console.WriteLine("|       LISTA DE JAULAS       |");
+                System.Console.WriteLine("===============================");
+                System.Console.WriteLine("    1. Aquario                 ");
+                System.Console.WriteLine("    2. Casa na Árvore          ");
+                System.Console.WriteLine("    3. Caverna de Pedra        ");
+                System.Console.WriteLine("    4. Gaiola                  ");
+                System.Console.WriteLine("    5. Pasto                   ");
+                System.Console.WriteLine("    6. Piscina                 ");
+                System.Console.WriteLine("    7. Piscina com gelo        ");
+                System.Console.WriteLine("===============================");
+                System.Console.Write("   Digite o código da jaula: ");
+                codigo = int.Parse(Console.ReadLine());
+
+                switch (codigo)
+                {
+                    case 1:
+                        Aquario aquario = new Aquario();
+                        alocou = aquario.ColocarNaJaula(animal);
+                        break;
+                    case 2:
+                        CasaArvore casaArvore = new CasaArvore();
+                        alocou = casaArvore.ColocarNaJaula(animal);
+                    break;
+                    case 3:
+                        CavernaPedra caverna = new CavernaPedra();
+                        alocou = caverna.ColocarNaJaula(animal);
+                    break;
+                    case 4:
+                        Gaiola gaiola = new Gaiola();
+                        alocou = gaiola.ColocarNaJaula(animal);
+                    break;
+                    case 5:
+                        Pasto pasto = new Pasto();
+                        alocou = pasto.ColocarNaJaula(animal);
+                    break;
+                    case 6:
+                        Piscina piscina = new Piscina();
+                        alocou = piscina.ColocarNaJaula(animal);
+                    break;
+                    case 7:
+                        PiscinaGelada gelada = new PiscinaGelada();
+                        alocou = gelada.ColocarNaJaula(animal);
+                    break;
+                }
+
+                if (alocou) 
+                {
+                    System.Console.WriteLine("Animal alocado com sucesso!");
+                }
+                else 
+                {
+                    System.Console.WriteLine("Não foi possível alocal esse animal ali");
+                }
                 Console.ReadLine();
-
-            }
-            System.Console.WriteLine("===============================");
+                
+            } while (!alocou);
         }
         public static void ClassificarAnimal(Animal animal)
         {
@@ -93,34 +169,13 @@ namespace ZooLogico
             var classe = animal.GetType();
             var @interface = classe.GetInterfaces().FirstOrDefault();
 
-            if ((typeof(IAquatico)).Equals(@interface))
-            {
-                System.Console.WriteLine($":::{classe.Name} pode ir para a Piscina:::");
-            }
-            else if ((typeof(IArboricula)).Equals(@interface))
-            {
-                System.Console.WriteLine($":::{classe.Name} pode ir para a Casa na Árvore:::");
-            }
-            else if ((typeof(IBranquiado)).Equals(@interface))
-            {
-                System.Console.WriteLine($":::{classe.Name} pode ir para o Aquário:::");
-            }
-            else if ((typeof(IQuionofilo)).Equals(@interface))
-            {
-                System.Console.WriteLine($":::{classe.Name} pode ir para a Piscina Gelada:::");
-            }
-            else if ((typeof(ITerrestre)).Equals(@interface))
-            {
-                System.Console.WriteLine($":::{classe.Name} pode ir para os Pastos ou Caverna de Pedra:::");
-            }
-            else if ((typeof(IVoador)).Equals(@interface))
-            {
-                System.Console.WriteLine($":::{classe.Name} pode ir para a Gaiola:::");
-            }
+
 
             Console.ReadLine();
 
         }
+
+
 
 
     }
